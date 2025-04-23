@@ -1,0 +1,23 @@
+<?php
+require_once dirname(__DIR__, 3) . '/config/db.php';
+require_once dirname(__DIR__, 2) . '/models/CartService.php';
+
+$db = new Database();
+$model = new CartService($db->conn);
+header('Content-Type: application/json');
+$method = $_SERVER['REQUEST_METHOD'];
+if ($method === 'GET') {
+    if (!isset($_SESSION["email"])) {
+        echo json_encode(['success' => false, 'message' => 'Người dùng chưa đăng nhập']);
+    }
+    else {
+        $result = $model->get($_SESSION["uid"]);
+        echo json_encode($result);
+    }
+}
+else {
+    $response = ['error' => 'Sai phương thức yêu cầu'];
+    header('Content-Type: application/json');
+    echo json_encode($response);
+}
+?>

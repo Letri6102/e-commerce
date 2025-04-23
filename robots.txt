@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /app/controllers/
+Disallow: /app/models/
+Disallow: /config/
+Disallow: /admin/
+Disallow: /api/
+Sitemap: 
